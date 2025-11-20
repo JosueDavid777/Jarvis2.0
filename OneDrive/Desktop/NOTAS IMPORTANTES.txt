@@ -1,0 +1,7 @@
+Para que tu asistente funciones esto funciona gracias a una api de google por lo que tendras que generar una contraseña de API como dejo en este tutorial(https://www.youtube.com/watch?v=183nTecxh4Q) creditos a :
+Percy peña. 
+Con esta contraseña abriremos el cmd y ejecutaremos el API donde instalaremos la API en nuestro sistema y ya el código reonocera tu API.
+
+setx GEMINI_API_KEY "TU_API_KEY_AQUI"
+
+
