@@ -43,7 +43,7 @@ def speak(text):
 # Clave Gemini
 api_key = os.getenv("GEMINI_API_KEY")
 if not api_key:
-    print("⚠️ ERROR: No encontré GEMINI_API_KEY. Configura tu clave primero.")
+    print("ERROR: No encontré GEMINI_API_KEY. Configura tu clave primero.")
     sys.exit(1)
 
 # Configurar Gemini
@@ -76,7 +76,7 @@ def transcribe_google(wav_path: str) -> str:
         print(" No entendí lo que dijiste.")
         return ""
     except sr.RequestError as e:
-        print(f"⚠️ Error en SpeechRecognition: {e}")
+        print(f" Error en SpeechRecognition: {e}")
         return ""
 
 def record(seconds: int) -> np.ndarray:
@@ -86,7 +86,7 @@ def record(seconds: int) -> np.ndarray:
     return rec
 
 def listen_for_wake():
-    print("🎧 Escuchando activación (di 'jarvis')...")
+    print(" Escuchando activación (di 'jarvis')...")
     rec = record(WAKE_SECONDS)
     if np.max(np.abs(rec)) > 28000:
        rec = normalize_audio(rec)
@@ -101,25 +101,25 @@ def get_gemini_response(prompt: str) -> str:
         response = model.generate_content(prompt)
         return response.text
     except Exception as e:
-        print("⚠️ Error al contactar con Gemini:", e)
+        print("Error al contactar con Gemini:", e)
         return "Hubo un problema al contactar con Gemini."
 
 
 def menu():
-    print("🎙️ Habla ahora...")
+    print(" Habla ahora...")
     rec = record(MAX_RECORD_SECONDS)
     if np.max(np.abs(rec)) > 28000:
        rec = normalize_audio(rec)
     wav_path = "command.wav"
     save_wav(wav_path, rec, SAMPLE_RATE)
     text = transcribe_google(wav_path)
-    print(f"📝 Texto reconocido: {text}")
+    print(f" Texto reconocido: {text}")
     if text == "pregunta":
         listen_and_respond()
 
 def listen_and_respond():
     """Graba el comando, lo transcribe y responde con IA."""
-    print("🎙️ Habla ahora...")
+    print(" Habla ahora...")
     rec = record(MAX_RECORD_SECONDS)
     rec = normalize_audio(rec)
     wav_path = "command.wav"
